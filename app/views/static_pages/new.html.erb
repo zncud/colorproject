@@ -1,0 +1,13 @@
+<%= render 'share/nail' %>
+<body class=nail onLoad="sample(<%= @nail %>)">
+<canvas id="nailcolor">
+</canvas>
+<%= form_for :rgb, url: '/update' do |f| %>
+  <%= f.color_field :color0 %>
+  <%= f.color_field :color1 %>
+  <%= f.color_field :color2 %>
+  <%= f.color_field :color3 %>
+  <%= f.color_field :color4 %>
+  <%= f.submit %>
+<% end %>
+</body>

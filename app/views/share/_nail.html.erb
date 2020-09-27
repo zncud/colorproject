@@ -1,0 +1,24 @@
+<script type="text/javascript">
+<!--
+function sample(color) {
+//描画コンテキストの取得
+var canvas = document.getElementById('nailcolor');
+if (canvas.getContext) {
+    var context = canvas.getContext('2d');
+    
+    for(i=0;i<5;i++){
+        //色を指定する
+        context.beginPath();
+        context.fillStyle = 'rgb('+color[i][0]+','+color[i][1]+','+color[i][2]+')'; //塗りつぶしの色は赤
+        //左から20上から40の位置に、幅50高さ100の四角形を描く
+        context.fillRect(20+50*i,40,30,20);
+        context.ellipse(35+50*i, 40, 15, 20, 0, 0, 2 * Math.PI);
+        context.ellipse(35+50*i, 61, 15, 10, 0, 0, 2 * Math.PI);
+        context.fill();
+    }
+}
+
+}
+
+//-->
+</script>
