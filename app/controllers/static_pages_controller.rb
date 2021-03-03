@@ -12,7 +12,6 @@ class StaticPagesController < ApplicationController
   end
 
   def random
-
   end
   
   def update
@@ -33,10 +32,10 @@ class StaticPagesController < ApplicationController
   end
 
   def saveDB
-    
+    Color.new(rgb: cookies[:a].gsub(('['),'').gsub((']'),'').gsub(('&'),',')).save
+  end
+
+  def deleteColor
+    Color.find(params[:id]).destroy
   end
 end
-
-
-#%5B0%2C+7%2C+53%5D&%5B0%2C+7%2C+53%5D&%5B0%2C+7%2C+53%5D&%5B0%2C+7%2C+53%5D&%5B0%2C+7%2C+53%5D
-#%5B160%2C+75%2C+75%5D&%5B167%2C+118%2C+118%5D&%5B201%2C+38%2C+38%5D&%5B132%2C+82%2C+82%5D&%5B109%2C+29%2C+29%5D

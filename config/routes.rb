@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   post '/saveDB', to:'static_pages#saveDB'
 
+  delete '/deleteColor', to:'static_pages#deleteColor'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
