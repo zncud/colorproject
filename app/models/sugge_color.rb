@@ -1,0 +1,2 @@
+class SuggeColor < ApplicationRecord
+end

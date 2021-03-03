@@ -1,4 +1,5 @@
 <%= render 'share/nail' %>
+<h2>下のボタンから色を選んでください</h2><br>
 <body class=nail onLoad="sample(<%= @nail %>)">
 <canvas id="nailcolor">
 </canvas>
@@ -8,6 +9,16 @@
   <%= f.color_field :color2 %>
   <%= f.color_field :color3 %>
   <%= f.color_field :color4 %>
-  <%= f.submit %>
+  <%= f.submit "反映"%>
 <% end %>
+<%= button_to "保存", {controller: 'static_pages', action: 'saveDB'}, {method: :post} %>
+<div>保存した色</div>
+
+<% Color.all.each do |color| %>
+  <div><%=color.rgb%></div>
+  <div onLoad="displayColor(<%= color.rgb %>)">
+  <% paramColor = color.rgb.split(",")%>
+  <%= button_to "反映", {controller: 'static_pages', action: 'update'} ,{params: {rgb: paramColor}}%>
+<% end %>
+
 </body>
