@@ -1,9 +1,7 @@
-<%= render 'share/nail' %>
-</head>
-<body class=nail onLoad="sample(<%=@suggeColor%>)">
-<%=@suggeColor%>
+<%= render 'share/color' %>
+<body class='color' onLoad="display_color(<%=@suggeColor%>)">
 <h2>これが良い！</h2>
-<canvas id="nailcolor">
+<canvas id="display-color">
 </canvas>
 <br><%= button_to "選んでほしい", {controller: 'static_pages', action: 'random'}, {method: :get} %>
 </body>

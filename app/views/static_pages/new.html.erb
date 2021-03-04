@@ -1,8 +1,7 @@
-<%= render 'share/nail' %>
+<%= render 'share/color' %>
 <h2>下のボタンから色を選んでください</h2><br>
-<body class=nail onLoad="sample(<%= @nail %>)">
-<%= @nail %>
-<canvas id="nailcolor">
+<body class='color' onLoad="display_color(<%= @nail %>)">
+<canvas id="display-color">
 </canvas>
 <%= form_for :rgb, url: '/update' do |f| %>
   <%= f.color_field :color0 %>
