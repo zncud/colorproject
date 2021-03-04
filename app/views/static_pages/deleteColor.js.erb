@@ -1,0 +1,16 @@
+$(function() {
+  $('#button_to').click(
+    function() {
+      $.ajax({
+        url: 'new.html',
+        dataType: 'html',
+          success: function() {
+            $('#del_<%=params[:id]%>').html("");
+          },
+          error: function() {
+            alert('error');
+          }
+        });
+      }
+    );
+});

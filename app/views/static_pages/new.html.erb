@@ -16,11 +16,13 @@
 <div>保存した色</div>
 
 <% Color.all.each do |color| %>
-  <div><%=color.rgb%></div>
-  <div onLoad="displayColor(<%= color.rgb %>)">
-  <% paramColor = color.rgb.split(",")%>
-  <%= button_to "反映", {controller: 'static_pages', action: 'update'} ,{params: {rgb: paramColor}}%>
-  <%= button_to "削除", {controller: 'static_pages', action: 'deleteColor'} ,{method: :delete, params: {id: color.id}}%>
+  <div class = "del_<%=color.id%>"><%=color.rgb%>
+    <div onLoad="displayColor(<%= color.rgb %>)">
+      <% paramColor = color.rgb.split(",")%>
+      <%= button_to "反映", {controller: 'static_pages', action: 'update'} ,{params: {rgb: paramColor}}%>
+      <%= button_to "削除", {controller: 'static_pages', action: 'deleteColor'} ,{remote: :true, method: :delete, params: {id: color.id}}%>
+    </div>
+  </div>
 <% end %>
 
 </body>
