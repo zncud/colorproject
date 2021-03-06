@@ -23,8 +23,4 @@ class SuggeColorTest < ActiveSupport::TestCase
     @suggeColor.save
     assert_not duplicate_color.valid?
   end
-
-
-
-
 end

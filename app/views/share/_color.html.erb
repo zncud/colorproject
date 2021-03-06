@@ -2,6 +2,8 @@
 function display_color(color) {
    //描画コンテキストの取得
     var canvas = document.getElementById('display-color');
+    var colorData
+    var rgbData
     if (canvas.getContext) {
         var context = canvas.getContext('2d');
         for(i=0;i<5;i++){
@@ -15,5 +17,20 @@ function display_color(color) {
             context.fill();
         }
     }
+    <% Color.all.each do |color| %>
+      colorData = document.getElementById('save-color<%=color.id%>')
+      
+      rgbData = "<%=(color.rgb) %>".replace(/\s+/g, "").split(',')
+      if(colorData.getContext){
+          var context = colorData.getContext('2d');
+          for(i=0;i<5;i++){
+            //色を指定する
+            context.beginPath();
+            context.fillStyle = 'rgb('+rgbData[i * 3]+','+rgbData[i * 3 + 1]+','+rgbData[i * 3 + 2]+')';
+            context.ellipse(35+50*i, 16, 15, 15, 0, 0, 2 * Math.PI);
+            context.fill();
+          }
+      }
+    <% end %>
 }
 </script>

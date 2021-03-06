@@ -37,6 +37,7 @@ class StaticPagesController < ApplicationController
     else
 
     end
+    redirect_to new_path
   end
 
   def deleteColor

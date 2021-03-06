@@ -1,7 +1,7 @@
 <%= render 'share/color' %>
 <h2>下のボタンから色を選んでください</h2><br>
 <body class='color' onLoad="display_color(<%= @nail %>)">
-<canvas id="display-color">
+<canvas id="display-color" width="270" height="80">
 </canvas>
 <%= form_for :rgb, url: '/update' do |f| %>
   <%= f.color_field :color0 %>
@@ -15,11 +15,13 @@
 <div>保存した色</div>
 
 <% Color.all.each do |color| %>
-  <div class = "del_<%=color.id%>"><%=color.rgb%>
+  <div class = "del_<%=color.id%>">
     <div onLoad="displayColor(<%= color.rgb %>)">
+      <canvas id="save-color<%=color.id %>" width="270" height="31">
+      </canvas>
       <% paramColor = color.rgb.split(",")%>
-      <%= button_to "反映", {controller: 'static_pages', action: 'update'} ,{params: {rgb: paramColor}}%>
-      <%= button_to "削除", {controller: 'static_pages', action: 'deleteColor'} ,{remote: :true, method: :delete, params: {id: color.id}}%>
+      <%= link_to "反映", update_path(params: {rgb: paramColor}), class: "button1", method: :post %>
+      <%= link_to "削除", deleteColor_path(params: {id: color.id}), method: :delete,remote: true ,class: "button1" %>
     </div>
   </div>
 <% end %>
