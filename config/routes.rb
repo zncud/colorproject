@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  get '/new', to:'static_pages#new'
+  get '/choice', to:'static_pages#choice'
 
   get '/random', to:'static_pages#random'
   
@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   post '/saveDB', to:'static_pages#saveDB'
 
   delete '/deleteColor', to:'static_pages#deleteColor'
+
+  get '/signup', to: 'users#new'
+
+  post '/signup', to: 'users#create'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

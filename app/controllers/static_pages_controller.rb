@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
     cookies[:a]=[[255, 255, 255],[255, 255, 255],[255, 255, 255],[255, 255, 255],[255, 255, 255]]
   end
 
-  def new
+  def choice
     @nailrgb=cookies[:a].gsub(('['),'').gsub((']'),'').split('&');
     @nail=[];
     5.times do |i|
@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   end
 
   def random
-    @suggeColor =rgb(SuggeColor.offset(rand(SuggeColor.count)).first.rgb.gsub(('['),'').gsub((']'),'').split(','))
+    @suggeColor = rgb(SuggeColor.offset(rand(SuggeColor.count)).first.rgb.gsub(('['),'').gsub((']'),'').split(','))
   end
   
   def update
