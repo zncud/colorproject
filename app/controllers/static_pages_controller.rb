@@ -27,7 +27,7 @@ class StaticPagesController < ApplicationController
       end
     end
     cookies[:a]=@rgb
-    redirect_to new_path
+    redirect_to choice_path
   end
 
   def saveDB
@@ -37,7 +37,7 @@ class StaticPagesController < ApplicationController
     else
 
     end
-    redirect_to new_path
+    redirect_to choice_path
   end
 
   def deleteColor
