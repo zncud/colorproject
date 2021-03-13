@@ -4,26 +4,24 @@ class StaticPagesController < ApplicationController
   end
 
   def choice
-    @nailrgb=cookies[:a].gsub(('['),'').gsub((']'),'').split('&');
-    @nail=[];
-    5.times do |i|
-      @nail.append(@nailrgb[i].split(','));
-    end
+    @nail=cookies[:a].gsub(('['),'').gsub((']'),'').gsub(('&'),',').split(',')
   end
 
   def random
-    @suggeColor = rgb(SuggeColor.offset(rand(SuggeColor.count)).first.rgb.gsub(('['),'').gsub((']'),'').split(','))
+    @suggeColor = rgb(SuggeColor.offset(rand(SuggeColor.count)).first.rgb.gsub(('['),'').gsub((']'),'').split(',')).split(',')
   end
   
   def update
-    @rgb=[]
+    @rgb=''
+    #保存した色を呼び出す
     if params[:rgb].kind_of?(Array)
       @color = params[:rgb]
       @rgb = rgb(@color)
+    #選択した色を呼び出す
     else
       5.times do |i|
-        @color = params[:rgb][('color'+i.to_s).intern]
-        @rgb[i] = [@color[1..2].hex,@color[3..4].hex,@color[5..6].hex]#hex->16進数を10進数にする
+        @color = params[:rgb][('color'+i.to_s).intern] #:color iに変換
+        @rgb = @rgb + @color[1..2].hex.to_s + ',' + @color[3..4].hex.to_s + ',' + @color[5..6].hex.to_s + ','#hex->16進数を10進数にする
       end
     end
     cookies[:a]=@rgb
@@ -35,25 +33,21 @@ class StaticPagesController < ApplicationController
     if @saveColor.valid?
       @saveColor.save
     else
-
+      
     end
     redirect_to choice_path
   end
 
   def deleteColor
     Color.find(params[:id]).destroy
+    redirect_to choice_path
   end
 
   def rgb(color)
-    @rgb = []
+    @rgb = ""
     5.times do |i|
-      @rgb[i] = [color[i * 3].to_i,color[1 + i * 3].to_i,color[2 + i * 3].to_i]
+      @rgb = @rgb + color[i * 3].to_s+','+color[1 + i * 3].to_s+','+color[2 + i * 3].to_s + ','
     end
     return @rgb
-  end
-
-  private
-  def color_params
-    @color = Color.find(params[:id])
   end
 end

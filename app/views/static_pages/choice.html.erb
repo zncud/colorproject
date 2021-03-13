@@ -1,6 +1,6 @@
 <%= render 'share/color' %>
 <h2>下のボタンから色を選んでください</h2><br>
-<body class='color' onLoad="display_color(<%= @nail %>)">
+<body class='color' onLoad="display_color(<%= @nail %>)"><%=cookies[:a]%>
 <canvas id="display-color" width="270" height="80">
 </canvas>
 <%= form_for :rgb, url: '/update' do |f| %>
@@ -13,15 +13,13 @@
 <% end %>
 <%= button_to "保存", {controller: 'static_pages', action: 'saveDB'}, {method: :post} %>
 <div>保存した色</div>
-
 <% Color.all.each do |color| %>
   <div class = "del_<%=color.id%>">
-    <div onLoad="displayColor(<%= color.rgb %>)">
       <canvas id="save-color<%=color.id %>" width="270" height="31">
       </canvas>
       <% paramColor = color.rgb.split(",")%>
       <%= link_to "反映", update_path(params: {rgb: paramColor}), class: "button1", method: :post %>
-      <%= link_to "削除", deleteColor_path(params: {id: color.id}), method: :delete,remote: true ,class: "button1" %>
+      <%= link_to "削除", deleteColor_path(params: {id: color.id}), method: :delete ,class: "button1" %>
     </div>
   </div>
 <% end %>
