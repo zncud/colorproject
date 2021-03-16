@@ -33,9 +33,11 @@ class StaticPagesController < ApplicationController
   end
 
   def saveDB
+
     @saveColor = Color.new(rgb: cookies[:a].gsub(('['),'').gsub((']'),'').gsub(('&'),','))
     if @saveColor.valid?
       @saveColor.save
+      CreateUser.create(id: @saveColor.id, userid: session[:user_id])
     else
       
     end
@@ -44,6 +46,7 @@ class StaticPagesController < ApplicationController
 
   def deleteColor
     Color.find(params[:id]).destroy
+    CreateUser.find(params[:id]).destroy
     redirect_to choice_path
   end
 

@@ -13,16 +13,19 @@
   <%= f.submit "反映"%>
 <% end %>
 <%= button_to "保存", {controller: 'static_pages', action: 'saveDB'}, {method: :post} %>
+
 <div>保存した色</div>
-<% Color.all.reverse.each do |color| %>
-  <div class = "del_<%=color.id%>">
-      <canvas id="save-color<%=color.id %>" width="270" height="31">
+
+<% CreateUser.where(userid: session[:user_id]).reverse.each do |userColor| %>
+  <div class = "del_<%=userColor.id%>">
+      <canvas id="save-color<%=userColor.id %>" width="270" height="31">
       </canvas>
-      <% paramColor = color.rgb.split(",")%>
+      <% paramColor = Color.find(userColor.id).rgb.split(',')%>
       <%= link_to "反映", update_path(params: {rgb: paramColor}), class: "button1", method: :post %>
-      <%= link_to "削除", deleteColor_path(params: {id: color.id}), method: :delete ,class: "button1" %>
+      <%= link_to "削除", deleteColor_path(params: {id: userColor.id}), method: :delete ,class: "button1" %>
     </div>
   </div>
 <% end %>
+
 
 </body>
