@@ -1,6 +1,7 @@
 <%= render 'share/color' %>
 <body class='color' onLoad="display_color(<%=@suggeColor%>)">
 <h2>これが良い！</h2>
+<p>下のボタンを押すと変わります</p>
 <canvas id="display-color"  width="270" height="80">
 </canvas>
 <br><%= button_to "選んでほしい", {controller: 'static_pages', action: 'random'}, {method: :get} %>

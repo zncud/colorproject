@@ -3,4 +3,6 @@
 <div>選択してください</div>
 <%= button_to "選んでほしい", {controller: 'static_pages', action: 'random'}, {method: :get} %>
 <%= button_to "試したい", {controller: 'static_pages', action: 'choice'}, {method: :get} %>
+<%= link_to "Sign in", signup_path%>
+<%= link_to "Sign up", signup_path%>
 </body>

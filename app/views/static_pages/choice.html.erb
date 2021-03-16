@@ -1,6 +1,7 @@
 <%= render 'share/color' %>
-<h2>下のボタンから色を選んでください</h2><br>
-<body class='color' onLoad="display_color(<%= @nail %>)"><%=cookies[:a]%>
+<h2>下のボタンから色を選び、<span>反映ボタンを押してください</h2>
+<p>後に保存ボタンを押すと下に追加できます</p><br>
+<body class='color' onLoad="display_color(<%= @nail %>)">
 <canvas id="display-color" width="270" height="80">
 </canvas>
 <%= form_for :rgb, url: '/update' do |f| %>
@@ -13,7 +14,7 @@
 <% end %>
 <%= button_to "保存", {controller: 'static_pages', action: 'saveDB'}, {method: :post} %>
 <div>保存した色</div>
-<% Color.all.each do |color| %>
+<% Color.all.reverse.each do |color| %>
   <div class = "del_<%=color.id%>">
       <canvas id="save-color<%=color.id %>" width="270" height="31">
       </canvas>
