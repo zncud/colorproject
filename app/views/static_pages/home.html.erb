@@ -3,7 +3,11 @@
 <div>選択してください</div>
 <%= button_to "選んでほしい", {controller: 'static_pages', action: 'random'}, {method: :get} %>
 <%= button_to "試したい", {controller: 'static_pages', action: 'choice'}, {method: :get} %>
+
+<%if !session[:user_id]%>
 <%= link_to "Sign in", signin_path%>
 <%= link_to "Sign up", signup_path%>
+<% else %>
 <%= link_to "Log out", logout_path, method: :delete%>
+<% end %>
 </body>

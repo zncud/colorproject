@@ -4,7 +4,11 @@ class StaticPagesController < ApplicationController
   end
 
   def choice
-    @nail=cookies[:a].gsub(('['),'').gsub((']'),'').gsub(('&'),',').split(',')
+    if session[:user_id]
+      @nail=cookies[:a].gsub(('['),'').gsub((']'),'').gsub(('&'),',').split(',')
+    else
+      redirect_to signin_path
+    end
   end
 
   def random
