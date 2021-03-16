@@ -1,12 +1,45 @@
 <% if @user.errors.any? %>
   <div id = "error_explanation">
-    <div class = "alert alert-danger">
-      The form contains <%= pluralize(@user.errors.count, "error") %>.
+    <div class = 'error'>
+      <% 
+      para = ['name', 'email', 'password', 'password_confirmation']
+      %>
+      <%
+      for i in 0..3 do
+        if params[:user][para[i].intern].size.zero?
+        %>
+          <div class = 'err'><%=para[i] %>が空白です</div>
+        <%
+        end
+      end
+      for i in 0..1 do
+        if !User.find_by(para[i].intern => params[:user][para[i]]).nil?
+        %>
+          <div class = 'err'><%=para[i]%>： <%=params[:user][para[i]]%>　は既に存在しています</div>
+        <%
+        end
+      end
+      if params[:user][:name].size > 51
+      %>
+        <div class = 'err'>名前が長すぎます（51文字以内）</div>
+      <%
+      end
+      if params[:user][:email].size > 256
+      %>
+　　    <div class = 'err'>emailが長すぎます（255文字以内）</div>
+      <%
+      end
+      if params[:user][:password].size < 6
+      %>
+　　    <div class = 'err'>パスワードが短すぎます（6文字以上）</div>
+      <%
+      end
+      if !params[:user][:password].eql?(params[:user][:password_confirmation])
+      %>
+        <div class = 'err'>PasswordとConfirmationが一致しません</div>
+      <%
+      end
+      %>
     </div>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
   </div>
 <% end %>
